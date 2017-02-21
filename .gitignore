@@ -1,0 +1,8 @@
+*.pro.user
+*.pro.user.*
+
+*.qm
+
+.libs/
+
+.qmake.conf
