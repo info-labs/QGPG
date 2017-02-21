@@ -21,6 +21,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_actionAboutQt_triggered();
+
 private:
     QSharedPointer<Ui::MainWindow> ui;
     GpgME::Context *ctx;
