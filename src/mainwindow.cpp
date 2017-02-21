@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     ctx(GpgME::Context::createForProtocol(GpgME::OpenPGP)),
-    model(new GPGKeyListModel(ctx))
+    model(new GPGKeyListModel(ctx.data()))
 {
     this->ui->setupUi(this);
 

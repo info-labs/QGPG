@@ -26,7 +26,7 @@ private slots:
 
 private:
     QSharedPointer<Ui::MainWindow> ui;
-    GpgME::Context *ctx;
+    QSharedPointer<GpgME::Context> ctx;
     GPGKeyListModel *model;
 
 };
