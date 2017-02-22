@@ -7,6 +7,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp
 
-include(../src/link.pri)
+include(../src/src.pri)
 include(../config/unix.pri)
 include(../config/win32.pri)

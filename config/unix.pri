@@ -1,5 +1,5 @@
 unix{
-    LIBS += -lgpgmepp
+    LIBS += -lgpgmepp -lqgpgme
 }
 
 macx{
