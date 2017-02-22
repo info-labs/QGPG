@@ -5,10 +5,12 @@
 
 #include <gpgme++/context.h>
 
+class KeyItem;
+
 class GPGKeyListModel : public QAbstractItemModel
 {
 public:
-    GPGKeyListModel(GpgME::Context *ctx, QObject *parent=nullptr);
+    GPGKeyListModel(const std::shared_ptr<GpgME::Context> &ctx, QObject *parent=nullptr);
 
     bool hasChildren(const QModelIndex &parent) const override;
 
@@ -22,7 +24,8 @@ public:
     QModelIndex parent(const QModelIndex &child) const override;
 
 private:
-    GpgME::Context *ctx;
+    std::shared_ptr<GpgME::Context> ctx;
+    std::shared_ptr<KeyItem> root;
 
 };
 

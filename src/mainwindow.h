@@ -32,7 +32,7 @@ private:
     void setVerifyResult(const GpgME::VerificationResult &result);
 
     QSharedPointer<Ui::MainWindow> ui;
-    QSharedPointer<GpgME::Context> ctx;
+    std::shared_ptr<GpgME::Context> ctx;
     GPGKeyListModel *model;
 
 };
