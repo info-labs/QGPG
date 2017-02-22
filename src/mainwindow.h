@@ -23,8 +23,14 @@ public:
 
 private slots:
     void on_actionAboutQt_triggered();
+    void on_actionVerifyFile_triggered();
+    void on_toolButtonVerify_clicked();
 
 private:
+    void verifyDetachedSignature(const QString &filepath, const QString &datapath);
+    void verifyOpaqueSignature(const QString &filepath);
+    void setVerifyResult(const GpgME::VerificationResult &result);
+
     QSharedPointer<Ui::MainWindow> ui;
     QSharedPointer<GpgME::Context> ctx;
     GPGKeyListModel *model;
