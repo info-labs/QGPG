@@ -8,7 +8,8 @@ HEADERS += \
     $$PWD/models/gpgkeylistmodel.h \
     $$PWD/mainwindow.h \
     $$PWD/preferencedialog.h \
-    $$PWD/settings.h
+    $$PWD/settings.h \
+    $$PWD/version.h
 
 FORMS += \
     $$PWD/mainwindow.ui \
