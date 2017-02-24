@@ -69,28 +69,40 @@
    </property>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
-     <string>About</string>
+     <string>&amp;About</string>
     </property>
     <addaction name="actionAboutQt"/>
    </widget>
    <widget class="QMenu" name="menuVerify">
     <property name="title">
-     <string>Verify</string>
+     <string>&amp;Verify</string>
     </property>
     <addaction name="actionVerifyFile"/>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="actionPreference"/>
+   </widget>
+   <addaction name="menuEdit"/>
    <addaction name="menuVerify"/>
    <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAboutQt">
    <property name="text">
-    <string>About Qt</string>
+    <string>About &amp;Qt</string>
    </property>
   </action>
   <action name="actionVerifyFile">
    <property name="text">
-    <string>VerifyFile</string>
+    <string>Verify&amp;File</string>
+   </property>
+  </action>
+  <action name="actionPreference">
+   <property name="text">
+    <string>&amp;Preference</string>
    </property>
   </action>
  </widget>

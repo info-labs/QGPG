@@ -23,6 +23,9 @@ public:
     QModelIndex index(int row, int column, const QModelIndex &parent) const override;
     QModelIndex parent(const QModelIndex &child) const override;
 
+public slots:
+    void resetEngineInfo();
+
 private:
     std::shared_ptr<GpgME::Context> ctx;
     std::shared_ptr<KeyItem> root;

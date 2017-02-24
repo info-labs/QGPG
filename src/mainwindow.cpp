@@ -10,15 +10,23 @@
 #include <gpgme++/key.h>
 
 #include "models/gpgkeylistmodel.h"
+#include "preferencedialog.h"
+#include "settings.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    settings(new Settings),
+    prefDialog(new PreferenceDialog(settings, this)),
     ctx(GpgME::Context::createForProtocol(GpgME::OpenPGP)),
-    model(new GPGKeyListModel(ctx))
+    model(nullptr)
 {
     this->ui->setupUi(this);
 
+    // init settings
+    this->load_settings();
+
+    this->model = new GPGKeyListModel(ctx, this);
     this->ui->treeViewPublicKeys->setModel(this->model);
 }
 
@@ -27,9 +35,24 @@ MainWindow::~MainWindow()
 
 }
 
+void MainWindow::load_settings()
+{
+    this->ctx->setEngineFileName(this->settings->engineFileName().toUtf8().constData());
+    this->ctx->setEngineHomeDirectory(this->settings->engineHomeDirectory().toUtf8().constData());
+}
+
 void MainWindow::on_actionAboutQt_triggered()
 {
     QMessageBox::aboutQt(this);
+}
+
+void MainWindow::on_actionPreference_triggered()
+{
+    this->prefDialog->load_settings();
+    if ( this->prefDialog->exec() == QDialog::Accepted ) {
+        this->load_settings();
+        this->model->resetEngineInfo();
+    }
 }
 
 void MainWindow::on_actionVerifyFile_triggered()

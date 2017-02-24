@@ -58,7 +58,7 @@ GPGKeyListModel::GPGKeyListModel(const std::shared_ptr<GpgME::Context> &ctx, QOb
     QAbstractItemModel(parent),
     ctx(ctx)
 {
-    this->root = KeyItem::create(ctx);
+    this->resetEngineInfo();
 }
 
 bool GPGKeyListModel::hasChildren(const QModelIndex &parent) const
@@ -162,4 +162,11 @@ QModelIndex GPGKeyListModel::parent(const QModelIndex &child) const
         this->createIndex(parent->row(), 0, parent.get());
     }
     return QModelIndex();
+}
+
+void GPGKeyListModel::resetEngineInfo()
+{
+    this->beginResetModel();
+    this->root = KeyItem::create(this->ctx);
+    this->endResetModel();
 }
