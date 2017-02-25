@@ -1,7 +1,7 @@
 TEMPLATE = subdirs
 
 CONFIG += ordered
-SUBDIRS = src app
+SUBDIRS = src app docs
 
 TRANSLATIONS += \
     src/QGPG_ja.ts

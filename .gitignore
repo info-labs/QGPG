@@ -6,3 +6,5 @@
 .libs/
 
 .qmake.conf
+
+.venv/
