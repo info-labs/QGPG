@@ -42,7 +42,15 @@ void PreferenceDialog::on_accepted()
 
 void PreferenceDialog::on_toolButtonFileName_clicked()
 {
-    QString filepath = QFileDialog::getOpenFileName(this, tr("Engine"), "", tr("GPG(gpg gpg2)"));
+    QString filepath = QFileDialog::getOpenFileName(this,
+                                                    tr("Engine"),
+                                                    "",
+#ifdef Q_OS_WIN
+                                                    tr("GPG(gpg.exe gpg2.exe)")
+#else
+                                                    tr("GPG(gpg gpg2)")
+#endif
+                                                    );
     if ( filepath.isEmpty() ) {
         return;
     }

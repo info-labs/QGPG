@@ -8,6 +8,8 @@ class Settings : public QSettings
 {
     Q_OBJECT
 public:
+    using QSettings::QSettings;
+
     Settings();
 
     QString engineFileName() const;

@@ -1,3 +1,3 @@
 win32{
-LIBS += -lgpgmepp -lqgpgme
+LIBS += -lgpgmepp -lqgpgme -lgpgme
 }

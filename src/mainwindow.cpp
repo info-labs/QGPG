@@ -4,10 +4,12 @@
 #include <QDateTime>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QTextStream>
 
 #include <QGpgME/DataProvider>
 #include <gpgme++/data.h>
 #include <gpgme++/key.h>
+#include <gpgme++/keylistresult.h>
 
 #include "models/gpgkeylistmodel.h"
 #include "preferencedialog.h"
@@ -16,7 +18,11 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+#ifdef Q_OS_WIN
+    settings(new Settings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName())),
+#else
     settings(new Settings),
+#endif
     prefDialog(new PreferenceDialog(settings, this)),
     ctx(GpgME::Context::createForProtocol(GpgME::OpenPGP)),
     model(nullptr)
@@ -156,6 +162,12 @@ void MainWindow::setVerifyResult(const GpgME::VerificationResult &result)
         QString issuer;
         if ( ! uid.isNull() ) {
             issuer = uid.id();
+        } else {
+            this->ctx->startKeyListing(fingerprint.toUtf8().constData());
+            GpgME::Error error;
+            key = this->ctx->nextKey(error);
+            this->ctx->endKeyListing();
+            issuer = key.userID(0).id();
         }
         if ( (summary & GpgME::Signature::Valid) && (summary & GpgME::Signature::Green) ) {
             stream << this->tr("Good signature from %1\n").arg(issuer);
